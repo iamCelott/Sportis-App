@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 type buttonProps = {
-  onClick: () => void;
+  onClick?: (e: any) => void;
   children: ReactNode;
   type?: any;
   disabled?: boolean;
@@ -16,7 +16,7 @@ type buttonProps = {
 };
 
 const Button = (props: buttonProps) => {
-  let buttonClassname: string = `focus:outline-none px-4 py-2 ${props.className} `;
+  let buttonClassname: string = `focus:outline-none px-4 py-2 whitespace-nowrap ${props.className} `;
 
   if (props.variant === "primary") {
     buttonClassname += "bg-blue-500 hover:bg-blue-600 text-white";

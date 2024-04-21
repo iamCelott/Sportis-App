@@ -1,5 +1,5 @@
-import { Model, DataTypes, Optional } from "sequelize";
-import sequelize from "../Connection/Connection";
+import { Model, DataTypes } from "sequelize";
+import conn from "../Connection/connection";
 
 interface userAttributes {
   id: number;
@@ -9,24 +9,14 @@ interface userAttributes {
   password: string;
 }
 
-interface userCreationAttributes extends Optional<userAttributes, "id"> {}
-
-class User
-  extends Model<userAttributes, userCreationAttributes>
-  implements userAttributes
-{
-  public id!: number;
-  public name!: string;
-  public email!: string;
-  public username!: string;
-  public password!: string;
-}
+export class User extends Model<userAttributes> {}
 
 User.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
     },
     name: {
@@ -37,31 +27,20 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        len: [4, 50],
-      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [8, 50],
-      },
     },
   },
   {
-    sequelize,
-    modelName: "users",
+    sequelize: conn,
+    tableName: "users",
     timestamps: false,
   }
 );
-
-export default User;

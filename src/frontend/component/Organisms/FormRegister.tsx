@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { UniqueConstraintError } from "sequelize";
-import User from "../../../backend/database/Models/UserModel";
+import { useState, useEffect } from "react";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
 import { Link } from "react-router-dom";
+import Modal from "./Modal";
+
 const FormRegister = () => {
   const [userData, setUserData] = useState({
     name: "",
@@ -11,20 +11,34 @@ const FormRegister = () => {
     username: "",
     password: "",
   });
+  const [showModal, setShowModal] = useState(false);
+  const [succesOrNot, setSuccesOrNot] = useState(false);
 
-  const handleLogin = async () => {
-    try {
-      const newUser = await User.create(userData);
-      console.log("User created:", newUser.toJSON());
-    } catch (error) {
-      if (error instanceof UniqueConstraintError) {
-        // Tangani kesalahan jika username sudah ada dalam database
-        console.error("Username already exists:", error);
-      } else {
-        // Tangani kesalahan lainnya
-        console.error("Error creating user:", error);
-      }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const handleRegister = async (e: any) => {
+    e.preventDefault;
+    if (Object.values(userData).some((value) => value === "")) {
+      alert("Please fill in all fields");
+      return;
     }
+
+    try {
+      const response = await fetch("http://localhost:3000/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(userData),
+      });
+      setSuccesOrNot(true);
+    } catch (e) {
+      setSuccesOrNot(false);
+    }
+    setShowModal(true);
   };
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -32,18 +46,34 @@ const FormRegister = () => {
         <h1 className="font-bold uppercase text-center p-3">Register</h1>
 
         <div className="flex flex-col gap-3 p-3 px-10">
-          <label htmlFor="email">Name: </label>
-          <Input type="text" name="name" placeholder="name" id="name" />
+          <label htmlFor="name">Name: </label>
+          <Input
+            type="text"
+            name="name"
+            placeholder="name"
+            id="name"
+            required={true}
+            onChange={handleChange}
+          />
 
           <label htmlFor="email">Email: </label>
-          <Input type="email" name="email" placeholder="email" id="email" />
+          <Input
+            type="email"
+            name="email"
+            placeholder="email"
+            id="email"
+            required={true}
+            onChange={handleChange}
+          />
 
-          <label htmlFor="email">Username: </label>
+          <label htmlFor="username">Username: </label>
           <Input
             type="text"
             name="username"
             placeholder="username"
             id="username"
+            required={true}
+            onChange={handleChange}
           />
 
           <label htmlFor="password">Password: </label>
@@ -52,8 +82,10 @@ const FormRegister = () => {
             name="password"
             placeholder="password"
             id="password"
+            required={true}
+            onChange={handleChange}
           />
-          <Button variant="primary" onClick={() => console.log("klik")}>
+          <Button variant="primary" type={"submit"} onClick={handleRegister}>
             Register
           </Button>
           <p>
@@ -64,8 +96,8 @@ const FormRegister = () => {
           </p>
         </div>
       </div>
+      {showModal && <Modal succesOrNot={succesOrNot} />}
     </div>
   );
 };
-
 export default FormRegister;
