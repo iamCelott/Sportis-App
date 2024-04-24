@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import conn from "../database/Connection/connection";
-import { User } from "../database/Models/userModel";
+import { User } from "../database/Models/UserModel";
 import cors from "cors";
 
 const app = express();
@@ -25,6 +25,24 @@ app.post("/create", async (req: Request, res: Response) => {
   } catch (e) {
     console.error(e);
     return res.json({ msg: "Fail to Create", status: 500, route: "/create" });
+  }
+});
+
+app.post("/login", async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  try {
+    const record = await User.findOne({
+      where: { email: email, password: password },
+    });
+
+    if (!record) {
+      return res.json({ status: 401, msg: "Incorrect Gmail or Password" });
+    }
+    
+    return res.json({ status: 200, msg: "Login Successful" });
+  } catch (e) {
+    console.error("Error during login:", e);
+    return res.status(500).json({ msg: "An error occurred during login" });
   }
 });
 

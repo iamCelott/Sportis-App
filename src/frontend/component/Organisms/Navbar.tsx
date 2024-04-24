@@ -70,7 +70,11 @@ const Navbar = () => {
               Download Sportis App
             </Button>
             <div className="flex-grow">
-              <Input type="text" className="sm:ml-0 h-11" placeholder="Search..." />
+              <Input
+                type="text"
+                className="sm:ml-0 h-11"
+                placeholder="Search..."
+              />
               <div className="flex text-xs sm:text-[0.6rem] md:text-xs lg:text-sm gap-2 md:gap-3 font-semibold py-3 sm:ml-0">
                 <a href="" className="">
                   Sneakers
