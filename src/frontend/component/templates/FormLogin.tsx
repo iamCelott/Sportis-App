@@ -2,7 +2,16 @@ import { useState } from "react";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
 import { Link } from "react-router-dom";
+import Modal from "../Organisms/Modal";
 const FormLogin = () => {
+  const [succesOrNot, setSuccesOrNot] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [statusText, setStatusText] = useState({
+    text: "",
+    buttonText: "",
+    linkTo: "",
+  });
+
   const [inputValue, setInputValue] = useState({
     email: "",
     password: "",
@@ -30,14 +39,23 @@ const FormLogin = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.status === 200) {
-          console.log("Login successful");
+          setStatusText({
+            text: "Login Successful",
+            buttonText: "Go To Homepage",
+            linkTo: "",
+          });
+          setSuccesOrNot(true);
         } else {
-          console.log("Login Failed:", data.msg);
+          setSuccesOrNot(false);
+          setStatusText({
+            text: "Login Failed",
+            buttonText: "Login Again",
+            linkTo: "login",
+          });
         }
       }
-    } catch (e) {
-      console.log("Failed" + e);
-    }
+    } catch (e) {}
+    setShowModal(true);
   };
 
   return (
@@ -74,6 +92,14 @@ const FormLogin = () => {
           </p>
         </div>
       </div>
+      {showModal && (
+        <Modal
+          text={statusText.text}
+          buttonText={statusText.buttonText}
+          succesOrNot={succesOrNot}
+          linkTo={statusText.linkTo}
+        />
+      )}
     </div>
   );
 };

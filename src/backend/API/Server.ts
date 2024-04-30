@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import conn from "../database/Connection/connection";
-import { User } from "../database/Models/UserModel";
+import conn from "../database/config/Connection";
+import { User } from "../database/models/UserModel";
 import cors from "cors";
 
 const app = express();
@@ -38,7 +38,7 @@ app.post("/login", async (req: Request, res: Response) => {
     if (!record) {
       return res.json({ status: 401, msg: "Incorrect Gmail or Password" });
     }
-    
+
     return res.json({ status: 200, msg: "Login Successful" });
   } catch (e) {
     console.error("Error during login:", e);

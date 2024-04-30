@@ -5,6 +5,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 type modalProps = {
   succesOrNot?: boolean;
+  text: string;
+  buttonText: string;
+  linkTo: string;
 };
 const Modal = (props: modalProps) => {
   useEffect(() => {
@@ -27,11 +30,11 @@ const Modal = (props: modalProps) => {
               alt=""
             />
             <h1 className="text-md text-center font-semibold xl:text-lg">
-              Successfully Create Account
+              {props.text}
             </h1>
-            <Link to="/login">
+            <Link to={`/${props.linkTo}`}>
               <Button variant="primary" className="mt-10 rounded-lg">
-                Go To Login Page
+                {props.buttonText}
               </Button>
             </Link>
           </div>
@@ -52,14 +55,14 @@ const Modal = (props: modalProps) => {
               alt=""
             />
             <h1 className="text-md text-center font-semibold xl:text-lg">
-              Failed to Create Account
+              {props.text}
             </h1>
             <Button
               onClick={() => window.location.reload()}
               variant="primary"
               className="mt-10 rounded-lg"
             >
-              Register Back
+              {props.buttonText}
             </Button>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import conn from "../Connection/connection";
+import conn from "../config/Connection";
 
 interface userAttributes {
   id: number;

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
 import { Link } from "react-router-dom";
-import Modal from "./Modal";
+import Modal from "../Organisms/Modal";
 
 const FormRegister = () => {
   const [userData, setUserData] = useState({
@@ -13,6 +13,11 @@ const FormRegister = () => {
   });
   const [showModal, setShowModal] = useState(false);
   const [succesOrNot, setSuccesOrNot] = useState(false);
+  const [statusText, setStatusText] = useState({
+    text: "",
+    buttonText: "",
+    linkTo: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -33,7 +38,17 @@ const FormRegister = () => {
         body: JSON.stringify(userData),
       });
       setSuccesOrNot(true);
+      setStatusText({
+        text: "Success to Create an Account",
+        buttonText: "Go To Login Page",
+        linkTo: "login",
+      });
     } catch (e) {
+      setStatusText({
+        text: "Failed to Create an Account",
+        buttonText: "Register Again",
+        linkTo: "register",
+      });
       setSuccesOrNot(false);
     }
     setShowModal(true);
@@ -94,8 +109,15 @@ const FormRegister = () => {
           </p>
         </div>
       </div>
-      {showModal && <Modal succesOrNot={succesOrNot} />}
-    </div>
+      {showModal && (
+        <Modal
+          text={statusText.text}
+          buttonText={statusText.buttonText}
+          succesOrNot={succesOrNot}
+          linkTo={statusText.linkTo}
+        />
+      )}
+    </div>    
   );
 };
 export default FormRegister;

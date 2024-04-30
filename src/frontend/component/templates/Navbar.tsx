@@ -6,14 +6,14 @@ const Navbar = () => {
       <header className="sticky top-0 bg-white z-50 mb-3">
         <nav className="w-full h-20 bg-[#4A25DB] rounded-bl-[40%] rounded-br-[40%] border-b-8 shadow-xl border-gray-500">
           <div className="flex float-end items-center pt-3 pr-3 gap-2">
-            <img src="/src/assets/logo.png" alt="" className="w-10" />
+            <img src="/src/frontend/assets/icons/default-profile.png" alt="" className="w-10" />
             <span className="font-poppins text-white font-semibold">
               Username
             </span>
           </div>
 
           <div className="flex flex-col items-center absolute left-[50%] right-[50%] top-5">
-            <span className="font-poppins  text-xl">
+            <span className="font-poppins text-xl">
               <span className="text-[#05FF00]">Sport</span>
               <span className="text-white">is</span>
             </span>
@@ -63,7 +63,7 @@ const Navbar = () => {
           <div className="sm:w-[70%] max-w-[1024px] px-3 mx-auto h-11 my-11 flex justify-between gap-3">
             <Button
               type="button"
-              className="hidden rounded-md sm:inline-block w-[110px] text-xs px-3"
+              className="hidden rounded-md lg:inline-block  text-xs px-3"
               onClick={() => console.log("Clicked")}
               variant="primary"
             >
