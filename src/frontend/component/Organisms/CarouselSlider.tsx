@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 const CarouselSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images: string[] = [
-    "/src/frontend/assets/carousel/hero-1.jpg",
-    "/src/frontend/assets/carousel/hero-1.jpg",
-    "/src/frontend/assets/carousel/hero-1.jpg",
-    "/src/frontend/assets/carousel/hero-1.jpg",
+    "/src/frontend/assets/carousel/hero1.jpg",
+    "/src/frontend/assets/carousel/hero2.jpg",
+    "/src/frontend/assets/carousel/hero3.jpg",
+    "/src/frontend/assets/carousel/hero4.jpg",
   ];
 
   const nextImg = () => {
@@ -38,7 +38,7 @@ const CarouselSlider = () => {
 
   return (
     <div className="bg-gray-200 w-full flex relative overflow-hidden">
-      <div className="w-full lg:w-[60%] h-full bg-red-400 mx-auto flex overflow-hidden relative">
+      <div className="w-full h-[250px] lg:h-[300px] bg-red-400 mx-auto flex overflow-hidden relative">
         <Button
           type="button"
           onClick={prevImg}
@@ -51,7 +51,7 @@ const CarouselSlider = () => {
           <img
             key={index}
             src={image}
-            className={`transition-transform duration-300 object-cover flex-shrink-0`}
+            className={`transition-transform duration-300 w-full object-cover flex-shrink-0`}
             style={{ transform: `translateX(${-currentIndex * 100}%)` }}
           />
         ))}

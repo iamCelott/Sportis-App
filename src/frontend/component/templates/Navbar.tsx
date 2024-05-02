@@ -6,7 +6,11 @@ const Navbar = () => {
       <header className="sticky top-0 bg-white z-50 mb-3">
         <nav className="w-full h-20 bg-[#4A25DB] rounded-bl-[40%] rounded-br-[40%] border-b-8 shadow-xl border-gray-500">
           <div className="flex float-end items-center pt-3 pr-3 gap-2">
-            <img src="/src/frontend/assets/icons/default-profile.png" alt="" className="w-10" />
+            <img
+              src="/src/frontend/assets/icons/default-profile.png"
+              alt=""
+              className="w-10"
+            />
             <span className="font-poppins text-white font-semibold">
               Username
             </span>
@@ -60,7 +64,7 @@ const Navbar = () => {
         </nav>
 
         <div className="w-full">
-          <div className="sm:w-[70%] max-w-[1024px] px-3 mx-auto h-11 my-11 flex justify-between gap-3">
+          <div className="px-3 max-w-[425px] sm:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] mx-auto h-11 my-11 flex justify-between gap-3">
             <Button
               type="button"
               className="hidden rounded-md lg:inline-block  text-xs px-3"
@@ -75,7 +79,7 @@ const Navbar = () => {
                 className="sm:ml-0 h-11"
                 placeholder="Search..."
               />
-              <div className="flex text-xs sm:text-[0.6rem] md:text-xs lg:text-sm gap-2 md:gap-3 font-semibold py-3 sm:ml-0">
+              <div className="flex py-3 sm:ml-0 font-semibold text-sm justify-between sm:justify-normal gap-5 ">
                 <a href="" className="">
                   Sneakers
                 </a>

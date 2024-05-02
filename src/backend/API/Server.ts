@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import conn from "../database/config/Connection";
 import { User } from "../database/models/UserModel";
+import { Product } from "../database/models/ProductModel";
 import cors from "cors";
 
 const app = express();
@@ -43,6 +44,31 @@ app.post("/login", async (req: Request, res: Response) => {
   } catch (e) {
     console.error("Error during login:", e);
     return res.status(500).json({ msg: "An error occurred during login" });
+  }
+});
+
+app.get("/products", async (req: Request, res: Response) => {
+  try {
+    const record = await Product.findAll();
+    res.json(record);
+  } catch (e) {
+    console.error("Error Find Product:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Find Product" });
+  }
+});
+
+app.get("/product/:name", async (req: Request, res: Response) => {
+  try {
+    const name = req.params.name;
+    const record = await Product.findAll({ where: { name: name } });
+    res.json(record);
+  } catch (e) {
+    console.error("Error Find Product:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Find Product" });
   }
 });
 

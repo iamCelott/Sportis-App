@@ -1,4 +1,4 @@
-import CardCategory from "../Molecules/CardCategory";
+import CardCategory from "./CardCategory";
 const CategoryFragment = () => {
   return (
     <>

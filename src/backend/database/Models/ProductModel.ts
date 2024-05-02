@@ -55,7 +55,7 @@ Product.init(
   },
   {
     sequelize: conn,
-    tableName: "users",
+    tableName: "products",
     timestamps: false,
   }
 );
