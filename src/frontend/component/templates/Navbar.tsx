@@ -1,20 +1,43 @@
+import { useEffect, useState } from "react";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
 const Navbar = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/user/${localStorage.getItem("userId")}`
+        );
+        const result = await response.json();
+        setData(result);
+      } catch (e) {
+        console.error("Error fetching data:", e);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <header className="sticky top-0 bg-white z-50 mb-3">
         <nav className="w-full h-20 bg-[#4A25DB] rounded-bl-[40%] rounded-br-[40%] border-b-8 shadow-xl border-gray-500">
-          <div className="flex float-end items-center pt-3 pr-3 gap-2">
-            <img
-              src="/src/frontend/assets/icons/default-profile.png"
-              alt=""
-              className="w-10"
-            />
-            <span className="font-poppins text-white font-semibold">
-              Username
-            </span>
-          </div>
+          {data.map((item: any, index: number) => (
+            <div
+              className="flex float-end items-center pt-3 pr-3 gap-2"
+              key={index}
+            >
+              <img
+                src="/src/frontend/assets/icons/default-profile.png"
+                alt=""
+                className="w-10"
+              />
+              <span className="font-poppins text-white font-semibold">
+                {item.username}
+              </span>
+            </div>
+          ))}
 
           <div className="flex flex-col items-center absolute left-[50%] right-[50%] top-5">
             <span className="font-poppins text-xl">

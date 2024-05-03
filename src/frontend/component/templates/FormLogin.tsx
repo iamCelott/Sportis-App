@@ -39,6 +39,7 @@ const FormLogin = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.status === 200) {
+          localStorage.setItem("userId", data.userId);
           setStatusText({
             text: "Login Successful",
             buttonText: "Go To Homepage",
@@ -54,7 +55,14 @@ const FormLogin = () => {
           });
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      setSuccesOrNot(false);
+      setStatusText({
+        text: "Login Failed",
+        buttonText: "Login Again",
+        linkTo: "login",
+      });
+    }
     setShowModal(true);
   };
 

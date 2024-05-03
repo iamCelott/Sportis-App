@@ -1,5 +1,23 @@
+import { useEffect, useState } from "react";
 import Button from "../Atoms/Button";
+import { useParams } from "react-router-dom";
 const FormProduct = () => {
+  const [data, setData] = useState(null);
+  const { name } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/product/${name}`);
+        const result = await response.json();
+        setData(result);
+      } catch (e) {
+        console.error("Error fetching data:", e);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <div className="px-3 max-w-[425px] sm:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] mx-auto z-10 font-sans sm:flex sm:gap-3">
@@ -46,6 +64,7 @@ const FormProduct = () => {
                 variant="secondary"
                 type="button"
                 className="rounded-lg w-1/2"
+                onClick={() => console.log(data)}
               >
                 Add To Cart
               </Button>

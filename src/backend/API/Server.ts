@@ -40,7 +40,7 @@ app.post("/login", async (req: Request, res: Response) => {
       return res.json({ status: 401, msg: "Incorrect Gmail or Password" });
     }
 
-    return res.json({ status: 200, msg: "Login Successful" });
+    return res.json({ status: 200, userId: record.id });
   } catch (e) {
     console.error("Error during login:", e);
     return res.status(500).json({ msg: "An error occurred during login" });
@@ -63,6 +63,19 @@ app.get("/product/:name", async (req: Request, res: Response) => {
   try {
     const name = req.params.name;
     const record = await Product.findAll({ where: { name: name } });
+    res.json(record);
+  } catch (e) {
+    console.error("Error Find Product:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Find Product" });
+  }
+});
+
+app.get("/user/:id", async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const record = await User.findAll({ where: { id: id } });
     res.json(record);
   } catch (e) {
     console.error("Error Find Product:", e);
