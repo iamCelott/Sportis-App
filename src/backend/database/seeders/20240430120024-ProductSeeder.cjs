@@ -4,29 +4,24 @@ const path = require("path");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const imagePath = "./hero-1.jpg"; // Ubah path sesuai dengan lokasi file gambar
-    const imageBuffer = fs.readFileSync(imagePath);
+    // const imageBuffer = fs.readFileSync(
+    //   "C:\\Users\\Dcvir\\Downloads\\meme-faces-11-1.jpg",
+    //   { encoding: "utf-8" }
+    // );
 
     await queryInterface.bulkInsert(
       "products",
       [
-        // {
-        //   name: "Raket Golf TaylorMade SIM MAX Driver",
-        //   description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-        //   price: 600000,
-        //   category: "Golf",
-        //   stock: 100,
-        //   condition: true,
-        //   image: Buffer.from(""),
-        // },
         {
-          name: "Produk Coba 2",
-          description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+          name: "Produk Coba",
+          description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
           price: 600000,
-          category: "Golf",
-          stock: 100,
-          condition: true,
-          image: Buffer.from(""),
+          category: "basket",
+          stock: 120,
+          condition: false,
+          image: "",
+          sell: 123,
+          ratings: 4.1,
         },
       ],
       {}

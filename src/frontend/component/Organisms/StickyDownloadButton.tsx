@@ -12,8 +12,8 @@ function StickyDownloadButton() {
       }}
     >
       <img
-        src="/src/frontend/assets/svg/download-square-svgrepo-com.svg"
-        className="w-1/2 mx-auto"
+        src="/src/frontend/assets/svg/downloadbtn.svg"
+        className="mx-auto"
         alt=""
       />
     </Button>

@@ -10,6 +10,7 @@ const FormRegister = () => {
     email: "",
     username: "",
     password: "",
+    picture: "",
   });
   const [showModal, setShowModal] = useState(false);
   const [succesOrNot, setSuccesOrNot] = useState(false);
@@ -21,10 +22,15 @@ const FormRegister = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      picture: `https://ui-avatars.com/api/?name=${prevUserData.name}.jpg&background=random`,
+    }));
   };
 
   const handleRegister = async (e: any) => {
     e.preventDefault;
+
     if (Object.values(userData).some((value) => value === "")) {
       alert("Please fill in all fields");
       return;
@@ -117,7 +123,7 @@ const FormRegister = () => {
           linkTo={statusText.linkTo}
         />
       )}
-    </div>    
+    </div>
   );
 };
 export default FormRegister;

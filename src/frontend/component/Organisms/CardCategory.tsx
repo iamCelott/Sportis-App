@@ -6,7 +6,7 @@ type cardCategoryProps = {
 };
 const CardCategory = (props: cardCategoryProps) => {
   return (
-    <Link to={`/products/${props.href}`}>
+    <Link to={`/category/${props.href}`}>
       <div className="w-[5rem] h-[5rem] lg:w-[5.5rem] lg:h-[5.5rem] bg-[#D9D9D9] flex justify-center rounded-lg items-center">
         <img
           src={`/src/frontend/assets/categories/${props.img}`}

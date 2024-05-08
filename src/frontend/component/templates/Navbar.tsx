@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
+import ProfileModal from "./ProfileModal";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Navbar = () => {
   const [data, setData] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
+    AOS.init({
+      duration: 400, // optional, default duration is 1000ms
+    });
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -21,7 +27,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 bg-white z-50 mb-3">
+      <header className="sticky top-0 bg-white z-40 mb-3">
         <nav className="w-full h-20 bg-[#4A25DB] rounded-bl-[40%] rounded-br-[40%] border-b-8 shadow-xl border-gray-500">
           {data.map((item: any, index: number) => (
             <div
@@ -29,9 +35,10 @@ const Navbar = () => {
               key={index}
             >
               <img
-                src="/src/frontend/assets/icons/default-profile.png"
+                src={item.picture}
+                onClick={() => setShowModal(true)}
                 alt=""
-                className="w-10"
+                className="w-10 rounded-full cursor-pointer hover:brightness-75"
               />
               <span className="font-poppins text-white font-semibold">
                 {item.username}
@@ -102,7 +109,7 @@ const Navbar = () => {
                 className="sm:ml-0 h-11"
                 placeholder="Search..."
               />
-              <div className="flex py-3 sm:ml-0 font-semibold text-sm justify-between sm:justify-normal gap-5 ">
+              <div className="flex py-3 sm:ml-0 font-semibold text-[0.6rem] sm:text-sm justify-between sm:justify-normal gap-5 ">
                 <a href="" className="">
                   Sneakers
                 </a>
@@ -150,6 +157,7 @@ const Navbar = () => {
         </div>
         <hr className="border-black opacity-50" />
       </header>
+      {showModal && <ProfileModal setShowModal={setShowModal} />}
     </>
   );
 };

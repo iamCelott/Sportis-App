@@ -10,6 +10,8 @@ interface productAttribute {
   stock: number;
   condition: boolean;
   image: Buffer;
+  sell: number;
+  ratings: number;
 }
 
 export class Product extends Model<productAttribute> {}
@@ -47,9 +49,16 @@ Product.init(
       allowNull: false,
       defaultValue: true,
     },
-
     image: {
       type: DataTypes.BLOB("long"),
+      allowNull: true,
+    },
+    sell: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    ratings: {
+      type: DataTypes.FLOAT,
       allowNull: true,
     },
   },

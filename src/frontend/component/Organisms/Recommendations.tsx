@@ -21,7 +21,7 @@ const Recommendations = () => {
       <div className=" overflow-x-auto flex gap-2 p-2 mb-10">
         {data &&
           data.slice(0, 10).map((item: any, index: number) => (
-            <Link to={`/product/${item.name}`} key={index}>
+            <Link to={`/product/${item.name}/${item.id}`} key={index}>
               <div className="flex-shrink-0 h-[20rem] w-[15rem] shadow-lg bg-white rounded-lg overflow-hidden">
                 <img
                   src={item.image}
@@ -39,11 +39,11 @@ const Recommendations = () => {
                       })}
                     </p>
                   </div>
-                  <div className="overflow-hidden">{item.description}</div>
+                  <div className="overflow-hidden"></div>
                   <div id="footer">
-                    <span>{item.rating}</span>
+                    <span>{item.ratings}</span>
                     <span className="px-2">|</span>
-                    <span>{item.terjual}</span>
+                    <span>{item.sell}</span>
                   </div>
                 </div>
               </div>

@@ -59,10 +59,24 @@ app.get("/products", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/product/:name", async (req: Request, res: Response) => {
+app.get("/product/:name/:id", async (req: Request, res: Response) => {
   try {
     const name = req.params.name;
-    const record = await Product.findAll({ where: { name: name } });
+    const id = req.params.id;
+    const record = await Product.findAll({ where: { name: name, id: id } });
+    res.json(record);
+  } catch (e) {
+    console.error("Error Find Product:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Find Product" });
+  }
+});
+
+app.get("/category/:categoryname", async (req: Request, res: Response) => {
+  try {
+    const categoryname = req.params.categoryname;
+    const record = await Product.findAll({ where: { category: categoryname } });
     res.json(record);
   } catch (e) {
     console.error("Error Find Product:", e);

@@ -42,7 +42,7 @@ const CarouselSlider = () => {
         <Button
           type="button"
           onClick={prevImg}
-          className="absolute left-5 top-1/2 z-30 rounded-full hover:bg-slate-200"
+          className="absolute left-5 top-1/2 z-20 rounded-full hover:bg-slate-200"
           variant="secondary"
         >
           &lt;
@@ -58,7 +58,7 @@ const CarouselSlider = () => {
         <Button
           type="button"
           onClick={nextImg}
-          className="absolute right-5 top-1/2 z-30 rounded-full hover:bg-slate-200"
+          className="absolute right-5 top-1/2 z-20 rounded-full hover:bg-slate-200"
           variant="secondary"
         >
           &gt;
