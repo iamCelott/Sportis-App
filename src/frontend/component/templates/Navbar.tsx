@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
 import ProfileModal from "./ProfileModal";
@@ -128,14 +129,16 @@ const Navbar = () => {
               </div>
             </div>
             <div className="w-[110px] flex gap-2 justify-between items-center">
-              <span>
-                <img
-                  className="cursor-pointer"
-                  src="/src/frontend/assets/icons/shoppingcart.png"
-                  alt="shoppingcart"
-                  onClick={() => alert("OK")}
-                />
-              </span>
+              <Link to="/cart">
+                <span>
+                  <img
+                    className="cursor-pointer"
+                    src="/src/frontend/assets/icons/shoppingcart.png"
+                    alt="shoppingcart"
+                  />
+                </span>
+              </Link>
+
               <span>
                 <img
                   className="cursor-pointer"

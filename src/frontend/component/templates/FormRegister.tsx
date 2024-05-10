@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
 import { Link } from "react-router-dom";
