@@ -12,6 +12,7 @@ interface userAttributes {
 
 export class User extends Model<userAttributes> {
   declare id: number;
+  declare picture: string;
 }
 
 User.init(

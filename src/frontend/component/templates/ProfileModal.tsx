@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface ProfileModalProps {
   setShowModal: (value: boolean) => void;
 }
@@ -16,7 +18,7 @@ const ProfileModal = (props: ProfileModalProps) => {
         >
           <h1 className="py-2 px-4 text-xl font-bold ">Profile Settings</h1>
           <button onClick={closeModal}>Close</button>
-        </div>
+        </div>  
       </div>
     </>
   );

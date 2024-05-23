@@ -38,7 +38,7 @@ const Navbar = () => {
               <img
                 src={item.picture}
                 onClick={() => setShowModal(true)}
-                alt=""
+                alt="error"
                 className="w-10 rounded-full cursor-pointer hover:brightness-75"
               />
               <span className="font-poppins text-white font-semibold">

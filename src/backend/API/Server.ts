@@ -3,9 +3,21 @@ import conn from "../database/config/Connection";
 import { User } from "../database/models/UserModel";
 import { Product } from "../database/models/ProductModel";
 import cors from "cors";
+import multer from "multer";
 
 const app = express();
 const port: number = 3000;
+
+const storage = multer.diskStorage({
+  destination: function (req: Request, file, cb) {
+    cb(null, "../../../uploads/");
+  },
+  filename: function (req: Request, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 conn
   .authenticate()
@@ -18,6 +30,10 @@ conn
 
 app.use(cors());
 app.use(express.json());
+
+app.post("/upload", upload.single("file"), (req: Request, res: Response) => {
+  console.log(req.file, req.body);
+});
 
 app.post("/create", async (req: Request, res: Response) => {
   try {
