@@ -10,7 +10,7 @@ const port: number = 3000;
 
 const storage = multer.diskStorage({
   destination: function (req: Request, file, cb) {
-    cb(null, "../../../uploads/");
+    cb(null, "../../../public/products/");
   },
   filename: function (req: Request, file, cb) {
     cb(null, file.originalname);
