@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-type HomeProps = {
+type MainLayoutProps = {
   children: ReactNode;
 };
-const HomeLayout = (props: HomeProps) => {
+const MainLayout = (props: MainLayoutProps) => {
   return (
     <div className="px-3 max-w-[425px] sm:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] mx-auto">
       {props.children}
@@ -10,4 +10,4 @@ const HomeLayout = (props: HomeProps) => {
   );
 };
 
-export default HomeLayout;
+export default MainLayout;

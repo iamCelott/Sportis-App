@@ -4,6 +4,7 @@ import { User } from "../database/models/UserModel";
 import { Product } from "../database/models/ProductModel";
 import cors from "cors";
 import multer from "multer";
+import { Cart } from "../database/models/CartModel";
 
 const app = express();
 const port: number = 3000;
@@ -114,6 +115,27 @@ app.get("/user/:id", async (req: Request, res: Response) => {
       .json({ msg: "An error occurred during Find Product" });
   }
 });
+
+app.post("/add-to-cart", async (req: Request, res: Response) => {
+  const { userId, productId, quantity } = req.body;
+
+  try {
+    const record = await Cart.create({
+      user_id: userId,
+      product_id: productId,
+      quantity: quantity,
+    });
+  } catch (e) {
+    console.error("Error Add to Cart:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Add to Cart" });
+  }
+});
+
+// app.get('/shop', async (req: Request, res:Response) => {
+//   const id =
+// })
 
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);

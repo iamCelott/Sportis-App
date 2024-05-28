@@ -22,6 +22,7 @@ module.exports = {
           image: "",
           sell: 123,
           ratings: 4.1,
+          user_id: 12,
         },
       ],
       {}

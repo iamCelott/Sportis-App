@@ -1,5 +1,5 @@
 import Navbar from "../component/templates/Navbar";
-import HomeLayout from "../component/Layouts/HomeLayout";
+import MainLayout from "../component/Layouts/MainLayout";
 import CarouselSlider from "../component/Organisms/CarouselSlider";
 import CategoryFragment from "../component/Organisms/CategoryFragment";
 import StickyDownloadButton from "../component/Organisms/StickyDownloadButton";
@@ -8,11 +8,11 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <HomeLayout>
+      <MainLayout>
         <CarouselSlider />
         <CategoryFragment />
         <Recommendations />
-      </HomeLayout>
+      </MainLayout>
       <StickyDownloadButton />
     </>
   );

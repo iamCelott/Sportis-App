@@ -1,6 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import conn from "../config/Connection";
-
+import { User } from "./UserModel";
 interface productAttribute {
   id: number;
   name: string;
@@ -12,6 +12,7 @@ interface productAttribute {
   image: Buffer;
   sell: number;
   ratings: number;
+  user_id: number;
 }
 
 export class Product extends Model<productAttribute> {}
@@ -61,6 +62,10 @@ Product.init(
       type: DataTypes.FLOAT,
       allowNull: true,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize: conn,
@@ -68,3 +73,6 @@ Product.init(
     timestamps: false,
   }
 );
+
+Product.belongsTo(User, { foreignKey: "user_id" });
+User.hasMany(Product, { foreignKey: "user_id" });

@@ -35,6 +35,17 @@ const Navbar = () => {
               className="flex float-end items-center pt-3 pr-3 gap-2"
               key={index}
             >
+              <Link to="/shop">
+                <Button variant="secondary" className="flex gap-2 rounded-lg">
+                  <img
+                    src="/src/frontend/assets/icons/shoppingcart.png"
+                    alt=""
+                    className="w-7 h-7"
+                  />
+                  <span>Your Shops</span>
+                </Button>
+              </Link>
+
               <img
                 src={item.picture}
                 onClick={() => setShowModal(true)}
