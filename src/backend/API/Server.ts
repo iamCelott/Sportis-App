@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
 import conn from "../database/config/Connection";
-import { User } from "../database/models/UserModel";
-import { Product } from "../database/models/ProductModel";
-import cors from "cors";
+import { Cart } from "../database/Models/CartModel";
+import { Product } from "../database/Models/ProductModel";
+import { User } from "../database/Models/UserModel";
 import multer from "multer";
-import { Cart } from "../database/models/CartModel";
+import cors from "cors";
+import Shop from "../../frontend/pages/Shop";
 
 const app = express();
 const port: number = 3000;
@@ -118,7 +119,6 @@ app.get("/user/:id", async (req: Request, res: Response) => {
 
 app.post("/add-to-cart", async (req: Request, res: Response) => {
   const { userId, productId, quantity } = req.body;
-
   try {
     const record = await Cart.create({
       user_id: userId,
@@ -130,6 +130,19 @@ app.post("/add-to-cart", async (req: Request, res: Response) => {
     return res
       .status(500)
       .json({ msg: "An error occurred during Add to Cart" });
+  }
+});
+
+app.post("/shop-product", async (req: Request, res: Response) => {
+  const { user_id } = req.body;
+  try {
+    const record = await Product.findAll({ where: { user_id: user_id } });
+    res.json(record);
+  } catch (e) {
+    console.error("Error Find Shop Product:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Find Shop Product" });
   }
 });
 
