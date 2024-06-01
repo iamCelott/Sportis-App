@@ -19,7 +19,7 @@ const Recommendations = () => {
     <>
       <p className="font-bold 2xl:text-xl py-3">Selected Categories</p>
       <div className=" overflow-x-auto flex gap-2 p-2 mb-10">
-        {data.slice(0, 10).map((item: any, index: number) => (
+        {data.map((item: any, index: number) => (
           <Link to={`/product/${item.name}/${item.id}`} key={index}>
             <div className="flex-shrink-0 h-[20rem] w-[15rem] shadow-lg bg-white rounded-lg overflow-hidden">
               <img

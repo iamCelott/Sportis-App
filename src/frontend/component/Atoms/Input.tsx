@@ -18,7 +18,7 @@ const Input = (props: inputProps) => {
       id={props.id}
       onChange={props.onChange}
       required={props.required}
-      className={`w-full bg-gray-300 py-2 px-3 rounded-md outline-none ${props.className}`}
+      className={`w-full bg-gray-300 text-xs py-1 px-3 rounded-md outline-none ${props.className}`}
     />
   );
 };
