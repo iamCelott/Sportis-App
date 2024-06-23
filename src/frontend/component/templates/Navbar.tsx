@@ -3,24 +3,26 @@ import { Link } from "react-router-dom";
 import Button from "../Atoms/Button";
 import Input from "../Atoms/Input";
 import ProfileModal from "../Organisms/ProfileModal";
+import UsernameAndAvatar from "../Organisms/UsernameAndAvatar";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const Navbar = () => {
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const localUserId = localStorage.getItem("userId");
-  let userId: number = 0;
+  const [userId, setUserId] = useState(() => {
+    const localUserId = localStorage.getItem("userId");
+    return localUserId ? parseInt(localUserId) : 0;
+  });
 
   const fetchData = async () => {
-    try {
-      if (localUserId) {
-        userId = parseInt(localUserId);
+    if (userId !== 0) {
+      try {
+        const response = await fetch(`http://localhost:3000/user/${userId}`);
+        const result = await response.json();
+        setData(result);
+      } catch (e) {
+        console.error("Error fetching data:", e);
       }
-      const response = await fetch(`http://localhost:3000/user/${userId}`);
-      const result = await response.json();
-      setData(result);
-    } catch (e) {
-      console.error("Error fetching data:", e);
     }
   };
 
@@ -30,37 +32,28 @@ const Navbar = () => {
     });
 
     fetchData();
-  }, []);
+  }, [userId]);
 
   return (
     <>
       <header className="sticky top-0 bg-white z-40 mb-3">
         <nav className="w-full h-16 md:h-20 bg-[#4A25DB] rounded-bl-[40%] rounded-br-[40%] border-b-8 shadow-xl border-gray-500">
-          {data.map((item: any, index: number) => (
-            <div
-              className="flex float-end items-center pt-3 pr-3 gap-2"
-              key={index}
-            >
-              {/* <Link to="/shop">
-                <Button variant="secondary" className="flex gap-2 rounded-lg">
-                  <img
-                    src="/src/frontend/assets/icons/shoppingcart.png"
-                    alt=""
-                    className="w-7 h-7"
-                  />
-                  <span>Your Shops</span>
-                </Button>
-              </Link> */}
-
-              <img
-                src={item.picture}
-                onClick={() => setShowModal(true)}
-                alt="error"
-                className="w-7 md:w-9 rounded-full cursor-pointer hover:brightness-75"
+          {userId === 0 && (
+            <Link to="/login" className="float-end pt-3 pr-3">
+              <UsernameAndAvatar
+                img="/src/frontend/assets/svg/login-icon.svg"
+                text="Login"
               />
-              <span className="font-poppins text-sm md:text-lg text-white font-semibold select-none">
-                {item.username}
-              </span>
+            </Link>
+          )}
+
+          {data.map((item: any, index: number) => (
+            <div className="float-end pt-3 pr-3" key={index}>
+              <UsernameAndAvatar
+                img={item.picture}
+                onClick={() => setShowModal(true)}
+                text={item.username}
+              />
             </div>
           ))}
 
@@ -112,7 +105,7 @@ const Navbar = () => {
         </nav>
 
         <div className="w-full">
-          <div className="px-3 max-w-[425px] sm:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] mx-auto h-11 mt-16 mb-10 flex justify-between gap-3">
+          <div className="px-3 max-w-[425px] sm:max-w-[640px] lg:max-w-[768px] xl:max-w-[1024px] mx-auto h-11 mt-12 mb-10 flex justify-between gap-3">
             <Button
               type="button"
               className="hidden rounded-md lg:inline-block  text-xs px-3"
@@ -124,7 +117,7 @@ const Navbar = () => {
             <div className="flex-grow">
               <Input
                 type="text"
-                className="sm:ml-0 h-11"
+                className="sm:ml-0 h-11 w-full"
                 placeholder="Search..."
               />
               <div className="flex py-3 sm:ml-0 font-semibold text-[0.6rem] sm:text-sm sm:gap-5 gap-3">

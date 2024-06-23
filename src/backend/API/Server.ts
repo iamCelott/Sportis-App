@@ -6,6 +6,7 @@ import { User } from "../database/Models/UserModel";
 import multer from "multer";
 import cors from "cors";
 import Shop from "../../frontend/pages/Shop";
+import { where } from "sequelize";
 
 const app = express();
 const port: number = 3000;
@@ -146,9 +147,56 @@ app.post("/shop-product", async (req: Request, res: Response) => {
   }
 });
 
-// app.get('/shop', async (req: Request, res:Response) => {
-//   const id =
-// })
+app.post("/user-date-update", async (req: Request, res: Response) => {
+  const { user_id, date } = req.body;
+
+  try {
+    const record = await User.update(
+      { tanggal_lahir: date },
+      { where: { id: user_id } }
+    );
+    res.json(record);
+  } catch (e) {
+    console.error("Error Update Date:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Update Date" });
+  }
+});
+
+app.post("/user-gender-update", async (req: Request, res: Response) => {
+  const { user_id, gender } = req.body;
+
+  try {
+    const record = await User.update(
+      { jenis_kelamin: gender },
+      { where: { id: user_id } }
+    );
+    res.json(record);
+  } catch (e) {
+    console.error("Error Update Gender:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Update Gender" });
+  }
+});
+
+app.post("/user-call-number-update", async (req: Request, res: Response) => {
+  const { user_id, callNumber } = req.body;
+
+  try {
+    const record = await User.update(
+      { no_telepon: callNumber },
+      { where: { id: user_id } }
+    );
+    res.json(record);
+  } catch (e) {
+    console.error("Error Update Call Number:", e);
+    return res
+      .status(500)
+      .json({ msg: "An error occurred during Call Number" });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);

@@ -8,6 +8,9 @@ interface userAttributes {
   username: string;
   password: string;
   picture: string;
+  no_telepon: string;
+  jenis_kelamin: string;
+  tanggal_lahir: Date;
 }
 
 export class User extends Model<userAttributes> {
@@ -43,6 +46,18 @@ User.init(
     },
     picture: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    no_telepon: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    jenis_kelamin: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    tanggal_lahir: {
+      type: DataTypes.DATE,
       allowNull: true,
     },
   },
